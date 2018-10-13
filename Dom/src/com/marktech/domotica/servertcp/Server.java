@@ -57,6 +57,8 @@ public class Server implements Runnable {
             //attendi una connessione
             //ricava il messaggio in arrivo
             //rispondi al messaggio
+
+            //Sviluppando
         }
 
     }
@@ -90,11 +92,3 @@ public class Server implements Runnable {
 
 
 }
-
-
-
-//Start
-
-//Stop
-
-//
