@@ -1,13 +1,19 @@
 package com.marktech.domotica.servertcp;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 /**
  * Created by PC-Fisso on 12/10/2018.
  */
 public class Server implements Runnable {
 
     private Thread threadServer;
+    private ServerSocket serverSocket;
     private boolean socketStop;
-    private int porta;
+    private int port;
+    private Thread runningThread;
 
     /**
      *
@@ -18,7 +24,8 @@ public class Server implements Runnable {
      * @param porta
      */
     public Server(int porta) {
-        this.porta = porta;
+        this.port = porta;
+
     }
 
     /************************************
@@ -38,11 +45,11 @@ public class Server implements Runnable {
     }
 
     public int getPorta() {
-        return porta;
+        return port;
     }
 
     public void setPorta(int porta) {
-        this.porta = porta;
+        this.port = porta;
     }
 
 
@@ -50,16 +57,30 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
+        synchronized(this) {
+            this.runningThread = Thread.currentThread();
+        }
 
-        // Controllo di flusso per lasciare il processo attivo. Unico modo per killare il processo
+            openServerSocket();
+            Socket clientSocket = null;
+            // Controllo di flusso per lasciare il processo attivo. Unico modo per killare il processo
         while(!isSocketStop()){
+
+            try {
+                clientSocket = this.serverSocket.accept();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+
+            ElaboraRichieste er = new ElaboraRichieste(clientSocket);
+            Thread readWriteProcess = new Thread(er);
+            readWriteProcess.start();
 
             //attendi una connessione
             //ricava il messaggio in arrivo
             //rispondi al messaggio
 
-            //Sviluppando
-            // test
+
         }
 
     }
@@ -79,6 +100,20 @@ public class Server implements Runnable {
     public void StopServer()
     {
         setSocketStop(true);
+    }
+
+    /**
+     *  ## Funzione openServerSocket
+     *
+     *  Istanzia e Inizializza un oggetto ServerSocket con la porta necessaria scelta dal costruttore.
+     *
+     */
+    private void openServerSocket() {
+        try {
+            this.serverSocket = new ServerSocket(this.port);
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot open port: " + Integer.toString(port), e);
+        }
     }
 
 
