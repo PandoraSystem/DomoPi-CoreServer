@@ -5,7 +5,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Created by PC-Fisso on 12/10/2018.
+ * Created by Marco N. on 12/10/2018.
+ *
+ * Classe Server
+ * Si attiva un server Tcp/Ip che accetta richieste e risponde
+ * Elabora anche il tipo di rischieste ed esegue in base agli ordini
+ *
+ * +++++++++++++++++++++
+ * Version 1.0
+ *
+ * +++++++++++++++++++++
  */
 public class Server implements Runnable {
 
@@ -72,13 +81,11 @@ public class Server implements Runnable {
                 e.printStackTrace();
             }
 
-            ElaboraRichieste er = new ElaboraRichieste(clientSocket);
+            // Inizio a gestire le richieste del socket, creo un nuovo oggetto e gli do in pasto il processo
+            // che non deve finire fin tanto che gli dico di smettere.
+            ElaboraRichieste er = new ElaboraRichieste(clientSocket,true);
             Thread readWriteProcess = new Thread(er);
             readWriteProcess.start();
-
-            //attendi una connessione
-            //ricava il messaggio in arrivo
-            //rispondi al messaggio
 
 
         }

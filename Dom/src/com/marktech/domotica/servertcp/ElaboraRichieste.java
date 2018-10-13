@@ -9,6 +9,11 @@ import java.net.Socket;
  *
  * Necessario per gestire le richieste in arrivo e per un futuro controllo delle chiavi ricevute/inviate
  *
+ * +++++++++++++++++++++
+ * Version 1.0
+ *
+ * +++++++++++++++++++++
+ *
  *
  */
 public class ElaboraRichieste implements Runnable{
@@ -17,7 +22,6 @@ public class ElaboraRichieste implements Runnable{
     private BufferedReader bufferedReader;
     private PrintWriter printWriter;
     private OutputStreamWriter outputStreamWriter;
-    private boolean socketConnect;
     private boolean telnet;
 
 
@@ -32,13 +36,6 @@ public class ElaboraRichieste implements Runnable{
         return clientSocket;
     }
 
-    public boolean isSocketConnect() {
-        return socketConnect;
-    }
-
-    public void setSocketConnect(boolean socketConnect) {
-        this.socketConnect = socketConnect;
-    }
 
     /***************************************************************
      *
@@ -85,23 +82,28 @@ public class ElaboraRichieste implements Runnable{
     public void run() {
 
         String message = null;
-        setSocketConnect(clientSocket.isConnected());
 
-        if(isSocketConnect()){
+
+        if(!clientSocket.isClosed()){
             // inizializzo gli oggetti
             try {
                 inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
                 printWriter = new PrintWriter(clientSocket.getOutputStream());
+                Comandi comandi = new Comandi(clientSocket);
 
                 // resta in ascolto
-                while(isSocketConnect())
+                while(!clientSocket.isClosed())
                 {
                     // Reading
                     message = bufferedReader.readLine();
                     System.out.println(message);
+
+                    // Elaborate
+                    String messaggioRx =  comandi.ControlloComandi(message);
+
                     // Writing
-                    printWriter.write("msg rx: " + message);                                                         // restituisco il messaggio
+                    printWriter.write("msg rx: " + messaggioRx);                                                         // restituisco il messaggio
                     if(telnet){printWriter.println("");}                                                                // nuova riga per leggere correttamente dal Telnet
                     printWriter.flush();
                 }
