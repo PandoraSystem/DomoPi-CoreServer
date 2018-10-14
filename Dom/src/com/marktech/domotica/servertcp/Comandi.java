@@ -1,7 +1,5 @@
 package com.marktech.domotica.servertcp;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
-
 import java.io.IOException;
 import java.net.Socket;
 
@@ -52,9 +50,12 @@ public class Comandi {
 
         switch(comando) {
             case "close":  clientSocket.close(); messaggioDiRitorno = "Chiusura del socket in corso";
-                break;
+            break;
             case "accendi": messaggioDiRitorno = AccensioneLuce();
-                break;
+            break;
+            case "help" : messaggioDiRitorno = "I comandi sono: accendi, close.";
+            break;
+
 
         }
 

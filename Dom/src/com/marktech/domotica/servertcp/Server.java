@@ -3,6 +3,7 @@ package com.marktech.domotica.servertcp;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * Created by Marco N. on 12/10/2018.
@@ -20,7 +21,7 @@ public class Server implements Runnable {
 
     private Thread threadServer;
     private ServerSocket serverSocket;
-    private boolean socketStop;
+    private boolean socketStop, debug;
     private int port;
     private Thread runningThread;
 
@@ -35,6 +36,11 @@ public class Server implements Runnable {
     public Server(int porta) {
         this.port = porta;
 
+    }
+
+    public Server(int porta, boolean debug) {
+        this.port = porta;
+        this.debug = debug;
     }
 
     /************************************
@@ -77,6 +83,10 @@ public class Server implements Runnable {
 
             try {
                 clientSocket = this.serverSocket.accept();
+
+                // only debug mode on
+                SocketInformation(clientSocket,debug);
+
             } catch(IOException e) {
                 e.printStackTrace();
             }
@@ -120,6 +130,38 @@ public class Server implements Runnable {
             this.serverSocket = new ServerSocket(this.port);
         } catch (IOException e) {
             throw new RuntimeException("Cannot open port: " + Integer.toString(port), e);
+        }
+    }
+
+
+    /**
+     *
+     * SocketInformation serve solo per debug.
+     * Restituisce i valori del socket.
+     *
+     * @param socket
+     * @param debug
+     */
+    private void SocketInformation(Socket socket,boolean debug)
+    {
+        if(debug){
+
+            try {
+                System.out.println("LocalAddress " + socket.getLocalAddress());
+                System.out.println("LocalPort " + socket.getLocalPort());
+                System.out.println("Channel " + socket.getChannel());
+                System.out.println("ReceiveBufferSize " + socket.getReceiveBufferSize());
+                System.out.println("KeepAlive " + socket.getKeepAlive());
+                System.out.println("OOBInline " + socket.getOOBInline());
+                System.out.println("RemoteSocketAddress " + socket.getRemoteSocketAddress());
+                System.out.println("ReuseAddress " + socket.getReuseAddress());
+                System.out.println("SendBufferSize " + socket.getSendBufferSize());
+                System.out.println("SoTimeout " + socket.getSoTimeout());
+                System.out.println("TcpNoDelay " + socket.getTcpNoDelay());
+                System.out.println("TrafficClass " + socket.getTrafficClass());
+            } catch(SocketException e) {
+                e.printStackTrace();
+            }
         }
     }
 
