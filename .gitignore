@@ -1,4 +1,8 @@
 
+#      Dev Files     #
+######################
+.eslintrc
+
 # Node Related Files #
 ######################
 node_modules/
