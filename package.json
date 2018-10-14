@@ -1,0 +1,19 @@
+{
+  "name": "domopi",
+  "version": "1.0.0",
+  "description": "Domotic system with rasp",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoredtech/DomoPi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcoredtech/DomoPi/issues"
+  },
+  "homepage": "https://github.com/marcoredtech/DomoPi#readme"
+}
