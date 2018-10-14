@@ -10,7 +10,16 @@
     "type": "git",
     "url": "git+https://github.com/marcoredtech/DomoPi.git"
   },
-  "author": "",
+  "author": {
+    "name":"Marco N.",
+    "url": "https://github.com/marcoredtech"
+  },
+  "contributors":[
+    {
+      "name": "Denni Bevilacqua",
+      "url": "https:dennibevilacqua.com"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/marcoredtech/DomoPi/issues"
