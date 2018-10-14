@@ -11,10 +11,10 @@
     "url": "git+https://github.com/marcoredtech/DomoPi.git"
   },
   "author": {
-    "name":"Marco N.",
+    "name": "Marco N.",
     "url": "https://github.com/marcoredtech"
   },
-  "contributors":[
+  "contributors": [
     {
       "name": "Denni Bevilacqua",
       "url": "https:dennibevilacqua.com"
@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/marcoredtech/DomoPi/issues"
   },
-  "homepage": "https://github.com/marcoredtech/DomoPi#readme"
+  "homepage": "https://github.com/marcoredtech/DomoPi#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
