@@ -1,6 +1,6 @@
 var express = require('express')
 var app = express()
-var routes = require('./webapp/routes/main')
+var routes = require('./routes/main')
 var net = require('net')
 
 // Create TCP Socket

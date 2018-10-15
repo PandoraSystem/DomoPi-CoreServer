@@ -2,9 +2,10 @@
   "name": "domopi",
   "version": "1.0.0",
   "description": "Domotic system with rasp",
-  "main": "server.js",
+  "main": "./webapp/server.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "start": "node ./webapp/server.js",
+    "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
