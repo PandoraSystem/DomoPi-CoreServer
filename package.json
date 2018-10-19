@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/marcoredtech/DomoPi#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
