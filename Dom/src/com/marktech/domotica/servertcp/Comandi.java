@@ -2,6 +2,7 @@ package com.marktech.domotica.servertcp;
 
 import java.io.IOException;
 import java.net.Socket;
+import com.marktech.domotica.raspberry.*;
 
 /**
  * Created by Marco on 13/10/2018.
@@ -17,6 +18,7 @@ import java.net.Socket;
 public class Comandi {
     private String comando;
     private Socket clientSocket;
+    private Test test = new Test();
 
     public String getComando() {
         return comando;
@@ -53,6 +55,8 @@ public class Comandi {
             break;
             case "accendi": messaggioDiRitorno = AccensioneLuce();
             break;
+            case "spegni" : messaggioDiRitorno = SpegniLuce();
+            break;
             case "help" : messaggioDiRitorno = "I comandi sono: accendi, close.";
             break;
 
@@ -62,11 +66,42 @@ public class Comandi {
         return messaggioDiRitorno;
     }
 
-        private String AccensioneLuce(){
-            String risposta = "Sto accendendo la luce";
+    private String SpegniLuce() {
+        String risposta = "Accensione riuscita";
+
+        try {
+            test.spegni();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return risposta = "accensione fallita";
+        }
+
+        System.out.println(risposta);
+        System.out.println("");
+        return risposta;
+
+    }
+
+    private String AccensioneLuce(){
+
+            String risposta = "Accensione riuscita";
+
+            try {
+                test.accendi();
+
+            } catch(Exception e) {
+                e.printStackTrace();
+
+                return risposta = "accensione fallita";
+            }
+
             System.out.println(risposta);
             System.out.println("");
             return risposta;
+
+
     }
 
 }
