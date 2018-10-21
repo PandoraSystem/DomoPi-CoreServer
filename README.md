@@ -7,7 +7,10 @@ For exemple the lights, an coffè machine, telephone...
 
 
 Interface UI writen with node.js.
+
 TcpServer writen with Java.
+
 Hardware comunication with Java (Pi4J library).
+
 Raspberry is "pi 0 W".
 
