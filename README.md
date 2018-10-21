@@ -6,9 +6,9 @@ This project porpose are to connect 3 element, an web interface, tcpServer, Rasp
 For exemple the lights, an coffè machine, telephone...
 
 
-Interface UI writen with node.js.
+Interface UI written with node.js.
 
-TcpServer writen with Java.
+TcpServer written with Java.
 
 Hardware comunication with Java (Pi4J library).
 
