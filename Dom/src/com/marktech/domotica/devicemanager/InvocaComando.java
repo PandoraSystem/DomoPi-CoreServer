@@ -41,7 +41,15 @@ public class InvocaComando {
     }
 
     public String execute(String incommingMessage){
-       return avaibleMessage.get(incommingMessage).execute();
+
+        try {
+            String messaggioRx;
+            messaggioRx = avaibleMessage.get(incommingMessage).execute();
+            return messaggioRx;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Comando errato";
+        }
     }
 
 

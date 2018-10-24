@@ -12,7 +12,7 @@ import java.net.Socket;
  * Necessario per gestire le richieste in arrivo e per un futuro controllo delle chiavi ricevute/inviate
  *
  * +++++++++++++++++++++
- * Version 1.0
+ * Version 1.3
  *
  * +++++++++++++++++++++
  *
