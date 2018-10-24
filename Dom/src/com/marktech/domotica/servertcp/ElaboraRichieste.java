@@ -1,5 +1,7 @@
 package com.marktech.domotica.servertcp;
 
+import com.marktech.domotica.devicemanager.InvocaComando;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -90,7 +92,9 @@ public class ElaboraRichieste implements Runnable{
                 inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
                 printWriter = new PrintWriter(clientSocket.getOutputStream());
-                Comandi comandi = new Comandi(clientSocket);
+
+                //Deprecated
+                //Comandi comandi = new Comandi(clientSocket);
 
                 // resta in ascolto
                 while(!clientSocket.isClosed())
@@ -100,10 +104,12 @@ public class ElaboraRichieste implements Runnable{
                     System.out.println(message);
 
                     // Elaborate
-                    String messaggioRx =  comandi.ControlloComandi(message);
+                    //String messaggioRx =  comandi.ControlloComandi(message); // DEPRECATED
+                    InvocaComando invocaComando = new InvocaComando();
+                    String messageRx = invocaComando.execute(message);
 
                     // Writing
-                    printWriter.write("msg rx: " + messaggioRx);                                                         // restituisco il messaggio
+                    printWriter.write("msg rx: " + messageRx);                                                         // restituisco il messaggio
                     if(telnet){printWriter.println("");}                                                                // nuova riga per leggere correttamente dal Telnet
                     printWriter.flush();
                 }
