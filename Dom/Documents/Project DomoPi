@@ -1,0 +1,24 @@
+#### Versione 1.2.2 ####
+
++++ Aggiunto alle classi Dispositivo la funzione LoadToDb.
+La funzione LoadToDb servirà nel momento in cui gli oggetti si caricaranno dal database e andranno ad interrogarsi.
+
+Sicuramente c'è da sistemare la questione.
+
+Flow Chart
+
+Client --> comando --> ElaboraRichieste --> InvocaComando --> Carica Dispositivo --> Esegui nella porta dedicata
+
+Per eseguire nella porta dedicata occorre caricare l'informazione salvata da qualche parte come per esempio in un database.
+La chiave per rendere unico l'oggetto sarà un ID "Intero?" ? Comunque in ID univoco.
+
+Andrà a pescare nel DB il dispositivo salvato se c'è, e caricherà l'uscita corretta.
+
+
+:: Classe General Device ::
+
++++ Aggiunto alla classe GeneralDevice la proprietà id.
++++ Aggiunti i costruttori
+--- Rimossa funzione per il GetCommand
+--- Rimossa proprietà obsoleta String command.
+

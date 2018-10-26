@@ -29,5 +29,6 @@ public class   DispositivoLuce extends Generaldevice {
 
     private void LoadToDb(){
         this.myPin = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_01,nomeDevice, PinState.LOW);
+
     }
 }
