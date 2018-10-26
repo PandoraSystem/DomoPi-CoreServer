@@ -13,15 +13,17 @@ public class   DispositivoLuce extends Generaldevice {
     private GpioPinDigitalOutput myPin;
     private String nomeDevice = "luceA";
 
-    public DispositivoLuce() {}
+    public DispositivoLuce() {
+        LoadToDb();
+    }
 
     public String LuceAccesa(){
-        //this.statoLuce = true;
+        myPin.high();
         return "Luce accesa";
     }
 
     public String LuceSpenta(){
-        //this.statoLuce = false;
+        myPin.low();
         return "Luce spenta";
     }
 
