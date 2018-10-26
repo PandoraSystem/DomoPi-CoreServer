@@ -23,7 +23,6 @@ public class ElaboraRichieste implements Runnable{
     private InputStreamReader inputStreamReader;
     private BufferedReader bufferedReader;
     private PrintWriter printWriter;
-    private OutputStreamWriter outputStreamWriter;
     private boolean telnet;
 
 
@@ -93,8 +92,6 @@ public class ElaboraRichieste implements Runnable{
                 bufferedReader = new BufferedReader(inputStreamReader);
                 printWriter = new PrintWriter(clientSocket.getOutputStream());
 
-                //Deprecated
-                //Comandi comandi = new Comandi(clientSocket);
 
                 // resta in ascolto
                 while(!clientSocket.isClosed())
@@ -103,13 +100,12 @@ public class ElaboraRichieste implements Runnable{
                     message = bufferedReader.readLine();
                     System.out.println(message);
 
-                    // Elaborate
-                    //String messaggioRx =  comandi.ControlloComandi(message); // DEPRECATED
+                    // Elaboration
                     InvocaComando invocaComando = new InvocaComando();
                     String messageRx = invocaComando.execute(message);
 
                     // Writing
-                    printWriter.write("msg rx: " + messageRx);                                                         // restituisco il messaggio
+                    printWriter.write("msg rx: " + messageRx);                                                       // restituisco il messaggio
                     if(telnet){printWriter.println("");}                                                                // nuova riga per leggere correttamente dal Telnet
                     printWriter.flush();
                 }

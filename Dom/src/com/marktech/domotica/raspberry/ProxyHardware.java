@@ -17,7 +17,11 @@ public class ProxyHardware {
     private GpioPinDigitalOutput uscita_2;
     private GpioPinDigitalOutput uscita_3;
     private GpioPinDigitalOutput uscita_4;
-    
+
+
+
+    private GpioPinDigitalOutput interfaceOutput;
+
 
 
     /***
@@ -73,17 +77,21 @@ public class ProxyHardware {
      *
      * Costructors
      *
-     * @param gpio
+     *
      */
-    public ProxyHardware(GpioController gpio) {
+    public ProxyHardware(){
         this.gpio = GpioFactory.getInstance();
     }
+
 
 
     /***
      * #### Methods ####
      */
 
+    public void setInterfaceOutput(GpioPinDigitalOutput interfaceOutput) {
+        this.interfaceOutput = interfaceOutput;
+    }
 
 
 
