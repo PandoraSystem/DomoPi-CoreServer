@@ -18,15 +18,18 @@ public class InvocaComando {
     Map<String, Imessaggi> avaibleMessage = new HashMap<String,Imessaggi>();
     List<Imessaggi> listaMessaggi = new ArrayList<Imessaggi>();
 
+    DispositivoLuce dispositivoLuce = new DispositivoLuce();
+    DispositivoMacchinaCaffe macchinaCaffe = new DispositivoMacchinaCaffe();
+
+
 
     public InvocaComando() {
+
         // Comandi Luce
-        DispositivoLuce dispositivoLuce = new DispositivoLuce();
         listaMessaggi.add(new ComandoLuceOff(dispositivoLuce));
         listaMessaggi.add(new ComandoLuceOn(dispositivoLuce));
 
         // Comandi caffè
-        DispositivoMacchinaCaffe macchinaCaffe = new DispositivoMacchinaCaffe();
         listaMessaggi.add(new ComandoAccendiMacchinaCaffe(macchinaCaffe));
         listaMessaggi.add(new ComandoSpegniMacchinaCaffe(macchinaCaffe));
         listaMessaggi.add(new ComandoFaiCaffe(macchinaCaffe));
@@ -45,6 +48,9 @@ public class InvocaComando {
         try {
             String messaggioRx;
             messaggioRx = avaibleMessage.get(incommingMessage).execute();
+
+            // Ripuliso la memoria dagli oggetti
+
             return messaggioRx;
         } catch (Exception e) {
             e.printStackTrace();

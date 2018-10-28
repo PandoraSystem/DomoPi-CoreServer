@@ -1,9 +1,6 @@
 package com.marktech.domotica.devicemanager.devices;
 
-import com.pi4j.io.gpio.GpioFactory;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
-import com.pi4j.io.gpio.PinState;
-import com.pi4j.io.gpio.RaspiPin;
+import com.pi4j.io.gpio.*;
 
 /**
  * RECEIVER
@@ -14,21 +11,35 @@ public class   DispositivoLuce extends Generaldevice {
     private String nomeDevice = "luceA";
 
     public DispositivoLuce() {
-        LoadToDb();
+        LoadDb();
     }
 
     public String LuceAccesa(){
+        // Attiva il pin
         myPin.high();
         return "Luce accesa";
     }
 
     public String LuceSpenta(){
+        // Disattiva il pin
         myPin.low();
         return "Luce spenta";
     }
 
-    private void LoadToDb(){
-        this.myPin = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_01,nomeDevice, PinState.LOW);
+    public void LoadDb(){
+
+        GpioController myControl = GpioFactory.getInstance();
+
+        Pin mioPin = RaspiPin.GPIO_01;
+
+        System.out.println(myControl.getProvisionedPin(mioPin));
+
+        if(myControl.getProvisionedPin(mioPin) == null){
+            this.myPin = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_01,nomeDevice, PinState.LOW);
+        }
+
 
     }
+
+
 }

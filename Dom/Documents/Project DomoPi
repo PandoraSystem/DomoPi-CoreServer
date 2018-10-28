@@ -1,3 +1,19 @@
+#### Versione 1.2.3 ####
+
+Occorre associare un nome pin ad ogni dispositivo dinamicamente e provisionare i pin.
+
+
+
+
+
+
+
+
+
+
+
+
+
 #### Versione 1.2.2 ####
 
 +++ Aggiunto alle classi Dispositivo la funzione LoadToDb.
@@ -21,4 +37,7 @@ Andrà a pescare nel DB il dispositivo salvato se c'è, e caricherà l'uscita co
 +++ Aggiunti i costruttori
 --- Rimossa funzione per il GetCommand
 --- Rimossa proprietà obsoleta String command.
+
+
+
 

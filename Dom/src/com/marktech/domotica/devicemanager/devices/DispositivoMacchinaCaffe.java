@@ -8,7 +8,7 @@ import com.pi4j.io.gpio.RaspiPin;
 public class DispositivoMacchinaCaffe extends Generaldevice {
     private GpioPinDigitalOutput myPinPower;
     private GpioPinDigitalOutput myPinAction;
-    private String nomeDevice = "luceA";
+    private String nomeDevice = "mCaffePower"; String nomeAction = "mCaffeAct";
 
     public DispositivoMacchinaCaffe(){
         LoadToDb();
@@ -29,8 +29,14 @@ public class DispositivoMacchinaCaffe extends Generaldevice {
     }
 
     private void LoadToDb(){
-        this.myPinPower = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_01,nomeDevice, PinState.LOW);
-        this.myPinAction = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_02,nomeDevice, PinState.LOW);
+
+        if(GpioFactory.getInstance().getProvisionedPin(RaspiPin.GPIO_02) == null){
+            this.myPinAction = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_02,nomeAction, PinState.LOW);
+        }
+        if(GpioFactory.getInstance().getProvisionedPin(RaspiPin.GPIO_03) == null){
+            this.myPinAction = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_03,nomeAction, PinState.LOW);
+        }
+
     }
 
 
