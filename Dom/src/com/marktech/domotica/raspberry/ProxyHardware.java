@@ -1,8 +1,15 @@
 package com.marktech.domotica.raspberry;
 
-import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioFactory;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
+import com.marktech.domotica.gpiodevice.Controller;
+import com.marktech.domotica.gpiodevice.device.DispositivoGpio;
+import com.pi4j.io.gpio.*;
+import org.jdom.JDOMException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 
 /**
  * Created by Marco N. - 21.10.2018.
@@ -12,6 +19,9 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 public class ProxyHardware {
 
     final GpioController gpio;
+    private Controller gpioController;
+    private List<DispositivoGpio> dispositivoGpiosLista = new ArrayList<>();
+
 
 
 
@@ -39,6 +49,8 @@ public class ProxyHardware {
      */
     public ProxyHardware(){
         this.gpio = GpioFactory.getInstance();
+        LoadPeriferiche();
+
     }
 
 
@@ -50,6 +62,33 @@ public class ProxyHardware {
     public void setInterfaceOutput(GpioPinDigitalOutput interfaceOutput) {
         this.interfaceOutput = interfaceOutput;
     }
+
+    private void SetUp(){
+        for(DispositivoGpio d: dispositivoGpiosLista){
+
+            // provisioning Output
+            if(d.getVersoPin() == "out"){
+                GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.getPinByAddress(d.getAddress()), String.valueOf(d.getId()), PinState.LOW);
+            }
+            // provisioning Input
+            if(d.getVersoPin() == "in"){
+                GpioFactory.getInstance().provisionDigitalInputPin(RaspiPin.getPinByAddress(d.getAddress()), String.valueOf(d.getId()),PinPullResistance.PULL_DOWN);
+            }
+        }
+    }
+
+    private void LoadPeriferiche(){
+        try {
+            gpioController = new Controller();
+        } catch(JDOMException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        dispositivoGpiosLista = gpioController.getListaGPIO();
+    }
+
 
 
 
