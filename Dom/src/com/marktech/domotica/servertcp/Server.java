@@ -26,17 +26,9 @@ public class Server implements Runnable {
     private Thread runningThread;
 
     /**
-     *
-     * COSTRUTTORE
-     *
-     * Configuro il server con solo la porta
-     *
-     * @param porta
+     * COSTRUTTORE *
+     * Configuro il server con solo la porta *
      */
-    public Server(int porta) {
-        this.port = porta;
-
-    }
 
     public Server(int porta, boolean debug) {
         this.port = porta;
@@ -44,11 +36,7 @@ public class Server implements Runnable {
     }
 
     /************************************
-     *
-     *
      * PROPERTY GETTER AND SETTER
-     *
-     *
      *************************************/
 
     public boolean isSocketStop() {
@@ -59,13 +47,7 @@ public class Server implements Runnable {
         this.socketStop = socketStop;
     }
 
-    public int getPorta() {
-        return port;
-    }
 
-    public void setPorta(int porta) {
-        this.port = porta;
-    }
 
 
 
