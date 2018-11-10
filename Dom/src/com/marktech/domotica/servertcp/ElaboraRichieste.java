@@ -7,7 +7,7 @@ import java.net.Socket;
 
 /**
  *
- * ElaboraRichieste
+ * ServerRequest
  *
  * Necessario per gestire le richieste in arrivo e per un futuro controllo delle chiavi ricevute/inviate
  *

@@ -1,11 +1,10 @@
 package com.marktech.domopi.controller.servertcp;
 
-import com.marktech.domotica.servertcp.ElaboraRichieste;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
+
 
 public class ServerTcpConnection implements Runnable {
 
@@ -46,8 +45,9 @@ public class ServerTcpConnection implements Runnable {
     @Override
     public void run() {
 
-        openServerSocket();
         Socket clientSocket = null;
+        openServerSocket();
+
         // Controllo di flusso per lasciare il processo attivo. Unico modo per killare il processo
         while(!isSocketStop()){
 

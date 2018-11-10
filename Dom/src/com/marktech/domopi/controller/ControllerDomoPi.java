@@ -2,6 +2,8 @@ package com.marktech.domopi.controller;
 
 public class ControllerDomoPi {
 
+
+
     // avvio il server
 
     // attendo il comando dal modulo Request
