@@ -1,6 +1,8 @@
 package com.marktech.domopi.controller.servertcp;
 
 
+import com.marktech.domopi.controller.ControllerDomoPi;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,7 +15,10 @@ public class ServerTcpConnection implements Runnable {
     private ServerSocket serverSocket;
     private boolean socketStop, debug;
     private int port;
-    private Thread runningThread;
+    public static int istanzeSocketAperte = 0;
+
+
+    private ControllerDomoPi controllerObserver;
 
     /**
      * COSTRUTTORE *
@@ -37,6 +42,11 @@ public class ServerTcpConnection implements Runnable {
         this.socketStop = socketStop;
     }
 
+    public void setControllerObserver(ControllerDomoPi controllerObserver) {
+        this.controllerObserver = controllerObserver;
+    }
+
+
 
 
 
@@ -44,16 +54,20 @@ public class ServerTcpConnection implements Runnable {
 
     @Override
     public void run() {
+        synchronized(this){
 
-        Socket clientSocket = null;
-        openServerSocket();
+            openServerSocket();
+        }
+
 
         // Controllo di flusso per lasciare il processo attivo. Unico modo per killare il processo
         while(!isSocketStop()){
 
             try {
+                Socket clientSocket = null;
                 clientSocket = this.serverSocket.accept();
-
+                istanzeSocketAperte++;
+                controllerObserver.request(clientSocket);
 
             } catch(IOException e) {
                 e.printStackTrace();
@@ -66,7 +80,7 @@ public class ServerTcpConnection implements Runnable {
 
 
 
-    public boolean StartServer()
+    public boolean startServer()
     {
         try {
             threadServer.start();
@@ -76,7 +90,7 @@ public class ServerTcpConnection implements Runnable {
         }   return true;
     }
 
-    public void StopServer()
+    public void stopServer()
     {
         setSocketStop(true);
     }
