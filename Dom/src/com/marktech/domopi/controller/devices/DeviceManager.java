@@ -1,9 +1,12 @@
 package com.marktech.domopi.controller.devices;
 
-import com.marktech.domopi.controller.commands.CommandInterface;
-import com.marktech.domopi.controller.commands.crud.crudInterface;
-import com.marktech.domopi.controller.commands.device.CommandTogle;
+import com.marktech.domopi.controller.commands.Comando;
+import com.marktech.domopi.controller.commands.ComandoCrea;
+import com.marktech.domopi.controller.message.Messaggio;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,16 +25,16 @@ import java.util.Map;
  */
 public class DeviceManager {
 
-    private Map<String,CommandInterface> comandi;
-    private Map<String,crudInterface> crud;
-    private List<CommandInterface> deviceCommand;
-    private List<crudInterface> crudCommand;
-    private List<InterfacciaDevice> listaDispositivi;
+    List<Comando> comandi = new ArrayList<>();
+    List<Dispositivo> dispositivi = new ArrayList<>();
+    Map<String,Comando> avaibleCommands = new HashMap<>();
 
     public DeviceManager(){
-        deviceCommand.add(new CommandTogle());
 
-        //crudCommand.add(new )
+        ComandoCrea cc = new ComandoCrea();
+
+        comandi.add(cc);
+
 
         caricaAssociazioniComandi();
     }
@@ -39,21 +42,23 @@ public class DeviceManager {
     // Carico le associazioni Map Stringa-Comando
     private void caricaAssociazioniComandi(){
 
-        try {
-            for(crudInterface c: crudCommand ){
-                crud.put(c.getStringCommand(),c);
-            }
+        for(Comando cmd: comandi){
+            avaibleCommands.put(cmd.getCommand(),cmd);
+        }
 
-            for(CommandInterface c: deviceCommand ){
-                comandi.put(c.getStringCommand(),c);
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-            System.out.println("Caricamento associazioni fallito");
+    }
+
+
+
+
+    public void elaboration(ArrayList<Messaggio> messaggi){
+        for(Messaggio msg:messaggi ){
+
+            avaibleCommands.get(msg.getComandoTipo()).execute(msg,dispositivi);
+
+
         }
     }
 
 
-    public void create() {
-    }
 }
