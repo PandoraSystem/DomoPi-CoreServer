@@ -1,5 +1,8 @@
 package com.marktech.domopi.controller.devices;
 
+import com.marktech.domopi.controller.gpio.GpioToglePin;
+import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.RaspiPin;
 
 import java.util.ArrayList;
@@ -34,6 +37,10 @@ public class DispositivoConcreto implements Dispositivo {
     }
 
     public void addPin(String pin){IO.add(pin);}
+
+    public void togle(String pin){
+        new GpioToglePin(pin);
+    }
 
 
 }

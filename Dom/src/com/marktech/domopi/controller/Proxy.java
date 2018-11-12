@@ -13,13 +13,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ControllerDomoPi {
+public class Proxy {
 
     private ServerTcpConnection server;
     private DeviceManager deviceManager;
 
 
-    public ControllerDomoPi(DeviceManager deviceManager) {
+    public Proxy(DeviceManager deviceManager) {
         this.server = server;
         this.deviceManager = deviceManager;
     }
@@ -33,7 +33,6 @@ public class ControllerDomoPi {
 
         InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
 
         // splitto i comandi se ce ne sono più di uno e passo un array di stringhe comando
         OperationList operationList = new OperationList(bufferedReader.readLine());

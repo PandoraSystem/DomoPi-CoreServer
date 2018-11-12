@@ -1,7 +1,7 @@
 package com.marktech.domopi.controller.servertcp;
 
 
-import com.marktech.domopi.controller.ControllerDomoPi;
+import com.marktech.domopi.controller.Proxy;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -18,7 +18,7 @@ public class ServerTcpConnection implements Runnable {
     public static int istanzeSocketAperte = 0;
 
 
-    private ControllerDomoPi controllerObserver;
+    private Proxy controllerObserver;
 
     /**
      * COSTRUTTORE *
@@ -42,7 +42,7 @@ public class ServerTcpConnection implements Runnable {
         this.socketStop = socketStop;
     }
 
-    public void setControllerObserver(ControllerDomoPi controllerObserver) {
+    public void setControllerObserver(Proxy controllerObserver) {
         this.controllerObserver = controllerObserver;
     }
 
