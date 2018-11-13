@@ -13,13 +13,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Proxy {
+public class ControllerDomoPi {
 
     private ServerTcpConnection server;
     private DeviceManager deviceManager;
 
 
-    public Proxy(DeviceManager deviceManager) {
+    public ControllerDomoPi(DeviceManager deviceManager) {
         this.server = server;
         this.deviceManager = deviceManager;
     }

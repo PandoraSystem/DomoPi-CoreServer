@@ -1,6 +1,8 @@
 package com.marktech.domopi.controller.periferiche;
 
-public class Operiferica {
+import java.io.Serializable;
+
+public class Operiferica implements Serializable {
     String pin;
     String id;
     String idGruppo;
