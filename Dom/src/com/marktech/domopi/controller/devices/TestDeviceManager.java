@@ -17,7 +17,7 @@ public class TestDeviceManager {
         OperationList operationList = new OperationList(comandoRicevuto);
 
         for(Messaggio m:operationList.getMessaggi()){
-            System.out.println(m.getComandoTipo()+m.getRiferimento()+m.getId()+m.getOpz1());
+            //System.out.println(m.getComandoTipo()+m.getRiferimento()+m.getId()+m.getOpz1());
         }
 
         deviceManager.elaboration(operationList.getMessaggi());

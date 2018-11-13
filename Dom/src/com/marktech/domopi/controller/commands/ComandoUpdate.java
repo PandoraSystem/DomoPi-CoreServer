@@ -16,7 +16,7 @@ public class ComandoUpdate implements Comando {
     public void execute(Messaggio msg, List<Dispositivo> dipositivi) {
         for(Dispositivo dispositivo : dipositivi){
             if(dispositivo.getId() == msg.getId()){
-                dispositivo.setNome();
+                dispositivo.setNome("sdf");
             }
         }
 
