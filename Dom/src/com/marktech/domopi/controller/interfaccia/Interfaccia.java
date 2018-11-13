@@ -28,4 +28,12 @@ public class Interfaccia {
     void delPeriferica(String idPeriferica){
         mappaPeriferiche.remove(idPeriferica);
     }
+
+    Iperiferica getPeriferica(Iperiferica iperiferica){
+        return mappaPeriferiche.get(iperiferica.getId());
+    }
+
+    Iperiferica getPeriferica(String idPeriferica){
+        return mappaPeriferiche.get(idPeriferica);
+    }
 }
