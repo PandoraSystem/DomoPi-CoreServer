@@ -25,13 +25,10 @@ public class Server implements Runnable {
     private int port;
     private Thread runningThread;
 
-    /***
-     * COSTRUTTORE  *
+    /**
+     * COSTRUTTORE *
+     * Configuro il server con solo la porta *
      */
-    public Server(int porta) {
-        this.port = porta;
-
-    }
 
     public Server(int porta, boolean debug) {
         this.port = porta;
@@ -39,7 +36,7 @@ public class Server implements Runnable {
     }
 
     /************************************
-     * PROPERTY GETTER AND SETTER *
+     * PROPERTY GETTER AND SETTER
      *************************************/
 
     public boolean isSocketStop() {
@@ -50,17 +47,20 @@ public class Server implements Runnable {
         this.socketStop = socketStop;
     }
 
+
+
+
+
+
     @Override
     public void run() {
         synchronized(this) {
             this.runningThread = Thread.currentThread();
-            }
+        }
 
             openServerSocket();
             Socket clientSocket = null;
-
-        // Controllo di flusso per lasciare il processo attivo.
-        // Unico modo per killare il processo
+            // Controllo di flusso per lasciare il processo attivo. Unico modo per killare il processo
         while(!isSocketStop()){
 
             try {
@@ -102,8 +102,10 @@ public class Server implements Runnable {
     }
 
     /**
-     *  ## Funzione openServerSocket  *
-     *  Istanzia e Inizializza un oggetto ServerSocket con la porta necessaria scelta dal costruttore.  *
+     *  ## Funzione openServerSocket
+     *
+     *  Istanzia e Inizializza un oggetto ServerSocket con la porta necessaria scelta dal costruttore.
+     *
      */
     private void openServerSocket() {
         try {
@@ -115,8 +117,12 @@ public class Server implements Runnable {
 
 
     /**
+     *
      * SocketInformation serve solo per debug.
      * Restituisce i valori del socket.
+     *
+     * @param socket
+     * @param debug
      */
     private void SocketInformation(Socket socket,boolean debug)
     {

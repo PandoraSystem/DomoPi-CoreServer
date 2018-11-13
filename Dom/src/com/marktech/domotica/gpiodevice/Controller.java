@@ -24,7 +24,7 @@ import java.util.List;
  * La classe Controller di gpiodevice permette di gestire il CRUD su xml.
  * Viene generato un file di nome GPIO_config.xml .
  *
- * Il comando "ComandoLettura non esiste perchè è disponibile direttamente da questa classe
+ * Il Comando "ComandoLettura non esiste perchè è disponibile direttamente da questa classe
  * la lista degli oggetti caricati all'avvio dell'applicazione.
  * Ogni volta che si modifica uno stato dei pin occorre riavviare l'applicazione
  *
