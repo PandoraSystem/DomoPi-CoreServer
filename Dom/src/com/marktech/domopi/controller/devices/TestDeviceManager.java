@@ -1,7 +1,6 @@
 package com.marktech.domopi.controller.devices;
 
 import com.marktech.domopi.controller.message.Messaggio;
-import com.marktech.domopi.controller.message.OperationList;
 
 /**
  * Created by Marco on 11/11/2018.

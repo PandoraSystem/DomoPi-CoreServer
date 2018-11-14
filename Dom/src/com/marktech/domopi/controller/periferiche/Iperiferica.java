@@ -6,4 +6,5 @@ public interface Iperiferica {
     boolean getStatus();
     String getId();
     String getIdGruppo();
+    Operiferica getOperiferica();
 }

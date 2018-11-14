@@ -1,32 +1,29 @@
 package com.marktech.domopi.controller.message;
 
+import com.marktech.domopi.controller.periferiche.Iperiferica;
+
+import java.io.Serializable;
+
 /**
  * Created by Marco on 11/11/2018.
  */
-public class Messaggio {
-    private String id,comandoTipo, riferimento, verso;
+public class Messaggio implements Serializable {
+    private String crude;
+    private Iperiferica iperiferica;
 
-    public Messaggio(String id, String comandoTipo, String riferimento, String verso) {
-        this.id = id;
-        this.comandoTipo = comandoTipo;
-        this.riferimento = riferimento;
-        this.verso = verso;
-
+    public String getCrude() {
+        return crude;
     }
 
-    public String getId() {
-        return id;
+    public void setCrude(String crude) {
+        this.crude = crude;
     }
 
-    public String getComandoTipo() {
-        return comandoTipo;
+    public Iperiferica getIperiferica() {
+        return iperiferica;
     }
 
-    public String getRiferimento() {
-        return riferimento;
-    }
-
-    public String getVerso() {
-        return verso;
+    public void setIperiferica(Iperiferica iperiferica) {
+        this.iperiferica = iperiferica;
     }
 }

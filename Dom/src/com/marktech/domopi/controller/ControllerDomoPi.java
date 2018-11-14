@@ -1,16 +1,12 @@
 package com.marktech.domopi.controller;
 
 import com.marktech.domopi.controller.devices.DeviceManager;
-import com.marktech.domopi.controller.message.OperationList;
 import com.marktech.domopi.controller.servertcp.ServerRequest;
 import com.marktech.domopi.controller.servertcp.ServerTcpConnection;
-import com.marktech.domotica.servertcp.Server;
-import sun.net.www.http.HttpClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ControllerDomoPi {
