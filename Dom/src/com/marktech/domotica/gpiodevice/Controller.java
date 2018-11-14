@@ -115,7 +115,7 @@ public class Controller {
             Document doc = new Document(gpioElement);
             doc.setRootElement(gpioElement);
 
-            // new XMLOutputter().output(doc, System.out);
+            // new XMLOutputter().output(doc, System.outperiferiche);
             XMLOutputter xmlOutput = new XMLOutputter();
 
             // display nice nice

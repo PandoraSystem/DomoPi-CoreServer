@@ -67,7 +67,7 @@ public class ProxyHardware {
         for(DispositivoGpio d: dispositivoGpiosLista){
 
             // provisioning Output
-            if(d.getVersoPin() == "out"){
+            if(d.getVersoPin() == "outperiferiche"){
                 GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.getPinByAddress(d.getAddress()), String.valueOf(d.getId()), PinState.LOW);
             }
             // provisioning Input

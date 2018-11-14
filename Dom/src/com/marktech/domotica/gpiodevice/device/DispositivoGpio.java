@@ -21,7 +21,7 @@ public class DispositivoGpio {
     private int address;
     private String versoPin;
     private File file;
-    private final String VERSO_OUT = "out";
+    private final String VERSO_OUT = "outperiferiche";
     private final String VERSO_IN = "in";
     private final String[] VERSO = {VERSO_OUT,VERSO_IN};
 
@@ -81,7 +81,7 @@ public class DispositivoGpio {
 
         document.getRootElement().addContent(elemento);
 
-        // new XMLOutputter().output(doc, System.out);
+        // new XMLOutputter().output(doc, System.outperiferiche);
         XMLOutputter xmlOutput = new XMLOutputter();
 
         // display nice nice
@@ -106,7 +106,7 @@ public class DispositivoGpio {
             try {
                 System.out.println("Attributo: " + elements.get(i).getAttribute("id").getValue());
                 System.out.println("Match: " + String.valueOf(getId()));
-                //System.out.println(new Attribute("id",String.valueOf(getId())));
+                //System.outperiferiche.println(new Attribute("id",String.valueOf(getId())));
 
                 if(node.getAttribute("id").getValue().equals(String.valueOf(getId())) ){
 
@@ -121,7 +121,7 @@ public class DispositivoGpio {
         }
 
 
-        // new XMLOutputter().output(doc, System.out);
+        // new XMLOutputter().output(doc, System.outperiferiche);
         XMLOutputter xmlOutput = new XMLOutputter();
 
         // display nice nice
@@ -143,12 +143,12 @@ public class DispositivoGpio {
             Element node =  elements.get(i);
 
 
-            //System.out.println("Uscita :" + node.getChildText("OutName"));
+            //System.outperiferiche.println("Uscita :" + node.getChildText("OutName"));
 
             try {
                 System.out.println("Attributo: " + elements.get(i).getAttribute("id").getValue());
                 System.out.println("Match: " + String.valueOf(getId()));
-                //System.out.println(new Attribute("id",String.valueOf(getId())));
+                //System.outperiferiche.println(new Attribute("id",String.valueOf(getId())));
 
                 if(node.getAttribute("id").getValue().equals(String.valueOf(getId())) ){
 
@@ -164,7 +164,7 @@ public class DispositivoGpio {
         }
 
 
-        // new XMLOutputter().output(doc, System.out);
+        // new XMLOutputter().output(doc, System.outperiferiche);
         XMLOutputter xmlOutput = new XMLOutputter();
 
         // display nice nice
