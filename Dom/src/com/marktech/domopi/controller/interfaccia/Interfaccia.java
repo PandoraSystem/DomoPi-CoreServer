@@ -9,31 +9,42 @@ import java.util.Map;
 
 /**
  * Created by Marco on 14/11/2018.
+ * Singleton
  */
 public class Interfaccia {
-    Map<String,Iperiferica> mappaPeriferiche;
+    private static Interfaccia istanza;
+    private Map<String,Iperiferica> mappaPeriferiche;
 
-    public Interfaccia() {
+    private Interfaccia() {
         this.mappaPeriferiche = new HashMap<>();
     }
 
-    void addPeriferica(Iperiferica iperiferica){
+    public static Interfaccia getIstanza(){
+        if(istanza == null)
+        {
+            istanza = new Interfaccia();
+        }
+        return istanza;
+    }
+
+
+    public void addPeriferica(Iperiferica iperiferica){
         mappaPeriferiche.put(iperiferica.getId(),iperiferica);
     }
 
-    void delPeriferica(Iperiferica iperiferica){
+    public void delPeriferica(Iperiferica iperiferica){
         mappaPeriferiche.remove(iperiferica.getId());
     }
 
-    void delPeriferica(String idPeriferica){
+    public void delPeriferica(String idPeriferica){
         mappaPeriferiche.remove(idPeriferica);
     }
 
-    Iperiferica getPeriferica(Iperiferica iperiferica){
+    public Iperiferica getPeriferica(Iperiferica iperiferica){
         return mappaPeriferiche.get(iperiferica.getId());
     }
 
-    Iperiferica getPeriferica(String idPeriferica){
+    public Iperiferica getPeriferica(String idPeriferica){
         return mappaPeriferiche.get(idPeriferica);
     }
 }

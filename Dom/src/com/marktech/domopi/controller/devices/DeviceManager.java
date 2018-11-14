@@ -1,7 +1,7 @@
 package com.marktech.domopi.controller.devices;
 
 import com.marktech.domopi.controller.commands.Comando;
-import com.marktech.domopi.controller.commands.ComandoCrea;
+import com.marktech.domopi.controller.commands.ComandoAdd;
 import com.marktech.domopi.controller.message.Messaggio;
 
 
@@ -31,7 +31,7 @@ public class DeviceManager {
 
     public DeviceManager(){
 
-        ComandoCrea cc = new ComandoCrea();
+        ComandoAdd cc = new ComandoAdd();
 
         comandi.add(cc);
 
