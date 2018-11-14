@@ -1,6 +1,6 @@
 package com.marktech.domopi.controller.periferiche;
 
-import com.marktech.domopi.controller.periferiche.out.PerifericaSwitch;
+import com.marktech.domopi.controller.periferiche.periferiche_out.PerifericaSwitch;
 
 import java.io.File;
 import java.io.FileOutputStream;
