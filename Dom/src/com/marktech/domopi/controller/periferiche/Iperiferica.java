@@ -5,4 +5,5 @@ public interface Iperiferica {
     void execute();
     boolean getStatus();
     String getId();
+    String getIdGruppo();
 }
