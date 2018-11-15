@@ -48,7 +48,7 @@ public class Operiferica implements Serializable {
     }
 
     public GpioPinDigitalOutput getProvisionedPin() {
-        if(provisionedPin == null) {provisioning();}
+        if(!isProvisioned) {provisioning();}
         return provisionedPin;
     }
 
