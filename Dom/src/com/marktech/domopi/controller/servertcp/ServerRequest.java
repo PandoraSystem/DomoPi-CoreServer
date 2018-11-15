@@ -5,7 +5,6 @@ import com.marktech.domotica.devicemanager.InvocaComando;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -29,11 +28,7 @@ public class ServerRequest implements Runnable{
 
 
     /***************************************************************
-     *
-     *
-     * Getter and Setter location
-     *
-     *
+     * Getter and Setter location *
      ***************************************************************/
     public Socket getClientSocket() {
         return clientSocket;
@@ -41,7 +36,7 @@ public class ServerRequest implements Runnable{
 
 
     /***************************************************************
-     * Constructors location *
+     * Constructors location
      ***************************************************************
      * Costruttore base *
      * @param clientSocket
@@ -49,9 +44,8 @@ public class ServerRequest implements Runnable{
      */
     public ServerRequest(Socket clientSocket) {
         this.clientSocket = clientSocket;
-        Thread threadRequest = new Thread(this);
-        threadRequest.start();
     }
+
 
     /***************************************************************
      * Thread elaboration *
@@ -64,6 +58,8 @@ public class ServerRequest implements Runnable{
 
         if(!clientSocket.isClosed()){
             // inizializzo gli oggetti
+
+
             try {
                 inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
