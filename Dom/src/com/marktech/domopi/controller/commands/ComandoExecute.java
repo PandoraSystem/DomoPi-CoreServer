@@ -15,8 +15,8 @@ public class ComandoExecute implements Comando {
     }
 
     @Override
-    public String getCommand() {
-        return "add";
+    public Cmd getCommand() {
+        return Cmd.EXE;
     }
 
 

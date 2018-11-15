@@ -40,6 +40,19 @@ public class PerifericaSwitch implements Iperiferica,Serializable {
     public void execute() {
         this.operiferica.getProvisionedPin().toggle();
     }
+
+    @Override
+    public void read() {
+        System.out.println("id: " + operiferica.getId());
+        System.out.println("id gruppo: "+ operiferica.getIdGruppo());
+        System.out.println("pin: " + operiferica.getPin());
+    }
+
+    @Override
+    public void delete() {
+        this.operiferica.deProvisioning();
+    }
+
     // Ritorna lo stato booleano del pin
     @Override
     public boolean getStatus(){

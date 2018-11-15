@@ -11,12 +11,13 @@ public class ComandoDelete implements Comando {
 
     @Override
     public void execute(Iperiferica iperiferica) {
+        Interfaccia.getIstanza().getPeriferica(iperiferica).delete();
         Interfaccia.getIstanza().delPeriferica(iperiferica);
     }
 
     @Override
-    public String getCommand() {
-        return "add";
+    public Cmd getCommand() {
+        return Cmd.DEL;
     }
 
 

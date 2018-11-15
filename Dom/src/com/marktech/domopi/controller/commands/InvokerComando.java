@@ -1,6 +1,5 @@
 package com.marktech.domopi.controller.commands;
 
-import com.marktech.domopi.controller.interfaccia.Interfaccia;
 import com.marktech.domopi.controller.periferiche.Iperiferica;
 
 import java.util.HashMap;
@@ -11,7 +10,7 @@ import java.util.Map;
  */
 public class InvokerComando {
 
-    private Map<String,Comando> comandi;
+    private Map<Cmd,Comando> comandi;
 
     public InvokerComando(){
         this.comandi = new HashMap<>();
@@ -33,7 +32,7 @@ public class InvokerComando {
         comandi.put(cmdUpd.getCommand(),cmdUpd);
     }
 
-    public void executeCommandMessage(String crude, Iperiferica iperiferica){
+    public void executeCommandMessage(Cmd crude, Iperiferica iperiferica){
         comandi.get(crude).execute(iperiferica);
     }
 }

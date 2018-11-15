@@ -13,11 +13,13 @@ public class Operiferica implements Serializable {
     private String id;
     private String idGruppo;
     private transient GpioPinDigitalOutput provisionedPin = null;
+    private boolean isProvisioned;
 
     public Operiferica(String pin, String id, String idGruppo) {
         this.pin = pin;
         this.id = id;
         this.idGruppo = idGruppo;
+        this.isProvisioned = false;
         provisioning();
     }
 
@@ -46,17 +48,31 @@ public class Operiferica implements Serializable {
     }
 
     public GpioPinDigitalOutput getProvisionedPin() {
+        if(provisionedPin == null) {provisioning();}
         return provisionedPin;
     }
 
     public void provisioning(){
-        MappaPin mappa = new MappaPin();
-        Pin pin = mappa.getMappaGpio().get(getPin());
-        String nomePin = getPin();
         try {
-            this.provisionedPin = GpioFactory.getInstance().provisionDigitalOutputPin(pin,nomePin, PinState.LOW);
+            MappaPin mappa = new MappaPin();
+            Pin thePin = mappa.getMappaGpio().get(getPin());
+            String nomePin = getPin();
+
+            if(!isProvisioned){
+                this.provisionedPin = GpioFactory.getInstance().provisionDigitalOutputPin(thePin,nomePin, PinState.LOW);
+                isProvisioned = true;
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void deProvisioning(){
+        if(isProvisioned){
+            GpioFactory.getInstance().unprovisionPin(provisionedPin);
+        }
+
+    }
+
+
 }

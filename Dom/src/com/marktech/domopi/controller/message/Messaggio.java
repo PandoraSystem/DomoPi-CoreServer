@@ -1,5 +1,6 @@
 package com.marktech.domopi.controller.message;
 
+import com.marktech.domopi.controller.commands.Cmd;
 import com.marktech.domopi.controller.periferiche.Iperiferica;
 
 import java.io.Serializable;
@@ -8,14 +9,14 @@ import java.io.Serializable;
  * Created by Marco on 11/11/2018.
  */
 public class Messaggio implements Serializable {
-    private String crude;
+    private Cmd crude;
     private Iperiferica iperiferica;
 
-    public Messaggio(int id) {
+    public Messaggio(int id, Cmd add) {
         this.id = id;
     }
 
-    public Messaggio(String crude, Iperiferica iperiferica, int id) {
+    public Messaggio(Cmd crude, Iperiferica iperiferica, int id) {
         this.crude = crude;
         this.iperiferica = iperiferica;
         this.id = id;
@@ -23,11 +24,11 @@ public class Messaggio implements Serializable {
 
     private int id;
 
-    public String getCrude() {
+    public Cmd getCrude() {
         return crude;
     }
 
-    public void setCrude(String crude) {
+    public void setCrude(Cmd crude) {
         this.crude = crude;
     }
 

@@ -12,12 +12,13 @@ public class ComandoRead implements Comando {
     @Override
     public void execute(Iperiferica iperiferica) {
         // Da inviare un Singleton Che fornirà il metodo di Response
-        //Interfaccia.getIstanza().getPeriferica(iperiferica.getId());
+        Interfaccia.getIstanza().getPeriferica(iperiferica.getId()).read();
+
     }
 
     @Override
-    public String getCommand() {
-        return "add";
+    public Cmd getCommand() {
+        return Cmd.RED;
     }
 
 
