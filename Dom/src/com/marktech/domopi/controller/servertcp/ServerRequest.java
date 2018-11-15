@@ -25,8 +25,7 @@ public class ServerRequest implements Runnable{
     private Socket clientSocket;
     private InputStreamReader inputStreamReader;
     private BufferedReader bufferedReader;
-    private PrintWriter printWriter;
-    private boolean telnet;
+
 
 
     /***************************************************************
@@ -42,45 +41,20 @@ public class ServerRequest implements Runnable{
 
 
     /***************************************************************
-     *
-     *
-     * Constructors location
-     *
-     *
-     ***************************************************************/
-
-
-    /**
-     *
-     * Costruttore base
-     *
+     * Constructors location *
+     ***************************************************************
+     * Costruttore base *
      * @param clientSocket
      * Is socket to work
      */
     public ServerRequest(Socket clientSocket) {
         this.clientSocket = clientSocket;
-    }
-
-    /**
-     *
-     * Constructor with telnet tests
-     *
-     * @param clientSocket
-     * @param telnet
-     *
-     * Select telnet = true if you want tests with telnet
-     */
-    public ServerRequest(Socket clientSocket, boolean telnet) {
-        this.clientSocket = clientSocket;
-        this.telnet = telnet;
+        Thread threadRequest = new Thread(this);
+        threadRequest.start();
     }
 
     /***************************************************************
-     *
-     *
-     * Thread elaboration
-     *
-     *
+     * Thread elaboration *
      ***************************************************************/
     @Override
     public void run() {
@@ -93,7 +67,6 @@ public class ServerRequest implements Runnable{
             try {
                 inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
-                printWriter = new PrintWriter(clientSocket.getOutputStream());
 
 
                 // resta in ascolto
@@ -107,15 +80,10 @@ public class ServerRequest implements Runnable{
                     InvocaComando invocaComando = new InvocaComando();
                     String messageRx = invocaComando.execute(message);
 
-                    // Writing
-                    printWriter.write("msg rx: " + messageRx);                                                       // restituisco il messaggio
-                    if(telnet){printWriter.println("");}                                                                // nuova riga per leggere correttamente dal Telnet
-                    printWriter.flush();
                 }
 
                 inputStreamReader.close();
                 bufferedReader.close();
-                printWriter.close();
 
 
             } catch(IOException e) {

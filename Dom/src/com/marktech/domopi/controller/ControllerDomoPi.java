@@ -12,12 +12,11 @@ import java.net.Socket;
 public class ControllerDomoPi {
 
     private ServerTcpConnection server;
-    private DeviceManager deviceManager;
+    
 
 
     public ControllerDomoPi(DeviceManager deviceManager) {
         this.server = server;
-        this.deviceManager = deviceManager;
     }
 
     /**
