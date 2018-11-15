@@ -12,12 +12,10 @@ import java.net.Socket;
 public class ControllerDomoPi {
 
     private ServerTcpConnection server;
-    private DeviceManager deviceManager;
 
 
     public ControllerDomoPi(DeviceManager deviceManager) {
         this.server = server;
-        this.deviceManager = deviceManager;
     }
 
     /**
@@ -31,7 +29,7 @@ public class ControllerDomoPi {
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
         // splitto i comandi se ce ne sono più di uno e passo un array di stringhe comando
-        OperationList operationList = new OperationList(bufferedReader.readLine());
+        //OperationList operationList = new OperationList(bufferedReader.readLine());
 
         new ServerRequest(socket);
     }

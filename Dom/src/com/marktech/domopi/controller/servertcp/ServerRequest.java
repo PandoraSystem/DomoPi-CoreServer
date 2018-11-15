@@ -5,7 +5,6 @@ import com.marktech.domotica.devicemanager.InvocaComando;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -25,16 +24,11 @@ public class ServerRequest implements Runnable{
     private Socket clientSocket;
     private InputStreamReader inputStreamReader;
     private BufferedReader bufferedReader;
-    private PrintWriter printWriter;
-    private boolean telnet;
+
 
 
     /***************************************************************
-     *
-     *
-     * Getter and Setter location
-     *
-     *
+     * Getter and Setter location *
      ***************************************************************/
     public Socket getClientSocket() {
         return clientSocket;
@@ -42,18 +36,9 @@ public class ServerRequest implements Runnable{
 
 
     /***************************************************************
-     *
-     *
      * Constructors location
-     *
-     *
-     ***************************************************************/
-
-
-    /**
-     *
-     * Costruttore base
-     *
+     ***************************************************************
+     * Costruttore base *
      * @param clientSocket
      * Is socket to work
      */
@@ -61,26 +46,9 @@ public class ServerRequest implements Runnable{
         this.clientSocket = clientSocket;
     }
 
-    /**
-     *
-     * Constructor with telnet tests
-     *
-     * @param clientSocket
-     * @param telnet
-     *
-     * Select telnet = true if you want tests with telnet
-     */
-    public ServerRequest(Socket clientSocket, boolean telnet) {
-        this.clientSocket = clientSocket;
-        this.telnet = telnet;
-    }
 
     /***************************************************************
-     *
-     *
-     * Thread elaboration
-     *
-     *
+     * Thread elaboration *
      ***************************************************************/
     @Override
     public void run() {
@@ -90,10 +58,11 @@ public class ServerRequest implements Runnable{
 
         if(!clientSocket.isClosed()){
             // inizializzo gli oggetti
+
+
             try {
                 inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
-                printWriter = new PrintWriter(clientSocket.getOutputStream());
 
 
                 // resta in ascolto
@@ -107,15 +76,10 @@ public class ServerRequest implements Runnable{
                     InvocaComando invocaComando = new InvocaComando();
                     String messageRx = invocaComando.execute(message);
 
-                    // Writing
-                    printWriter.write("msg rx: " + messageRx);                                                       // restituisco il messaggio
-                    if(telnet){printWriter.println("");}                                                                // nuova riga per leggere correttamente dal Telnet
-                    printWriter.flush();
                 }
 
                 inputStreamReader.close();
                 bufferedReader.close();
-                printWriter.close();
 
 
             } catch(IOException e) {
