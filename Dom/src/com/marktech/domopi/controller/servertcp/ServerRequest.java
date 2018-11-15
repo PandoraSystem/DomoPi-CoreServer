@@ -1,10 +1,9 @@
 package com.marktech.domopi.controller.servertcp;
 
-import com.marktech.domotica.devicemanager.InvocaComando;
+import com.marktech.domopi.controller.ControllerDomoPi;
+import com.marktech.domopi.controller.message.Messaggio;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -22,8 +21,6 @@ import java.net.Socket;
  */
 public class ServerRequest implements Runnable{
     private Socket clientSocket;
-    private InputStreamReader inputStreamReader;
-    private BufferedReader bufferedReader;
 
 
 
@@ -60,29 +57,31 @@ public class ServerRequest implements Runnable{
             // inizializzo gli oggetti
 
 
-            try {
-                inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
-                bufferedReader = new BufferedReader(inputStreamReader);
+            try (
+                 ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream())
+                )
 
-
+                {
                 // resta in ascolto
                 while(!clientSocket.isClosed())
                 {
                     // Reading
-                    message = bufferedReader.readLine();
-                    System.out.println(message);
+                    //message = bufferedReader.readLine();
+                    // Creo un nuovo Messaggio
+                    Messaggio messaggio = (Messaggio) objectInputStream.readObject();
+                    //ListaMessaggi.getIstanza().addMessaggio(messaggio);
+                    ControllerDomoPi.getGestione().startProceses(messaggio);
+
 
                     // Elaboration
-                    InvocaComando invocaComando = new InvocaComando();
-                    String messageRx = invocaComando.execute(message);
+
 
                 }
 
-                inputStreamReader.close();
-                bufferedReader.close();
-
 
             } catch(IOException e) {
+                e.printStackTrace();
+            } catch(ClassNotFoundException e) {
                 e.printStackTrace();
             }
 

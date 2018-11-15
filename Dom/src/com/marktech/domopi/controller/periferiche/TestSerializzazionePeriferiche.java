@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 /**
  * Created by Marco on 13/11/2018.
  */
-public class TestPeriferiche {
+public class TestSerializzazionePeriferiche {
 
     public static void main(String[] args) {
 

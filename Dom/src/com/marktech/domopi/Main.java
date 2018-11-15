@@ -8,12 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        DeviceManager deviceManager = new DeviceManager();
-        ControllerDomoPi controller = new ControllerDomoPi(deviceManager);
-        ServerTcpConnection server = new ServerTcpConnection(9000);
-        server.setControllerObserver(controller);
+        ControllerDomoPi.getGestione().startServer();
 
-        server.startServer();
 
     }
 }

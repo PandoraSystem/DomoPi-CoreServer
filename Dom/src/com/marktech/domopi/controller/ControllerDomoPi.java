@@ -1,49 +1,43 @@
 package com.marktech.domopi.controller;
 
-import com.marktech.domopi.controller.devices.DeviceManager;
-import com.marktech.domopi.controller.servertcp.ServerRequest;
+import com.marktech.domopi.controller.commands.InvokerComando;
+import com.marktech.domopi.controller.message.Messaggio;
 import com.marktech.domopi.controller.servertcp.ServerTcpConnection;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
 
 public class ControllerDomoPi {
 
     private ServerTcpConnection server;
+    private static ControllerDomoPi gestione;
+    private boolean serverStatus = false;
+    private InvokerComando invokerComando = null;
 
 
 
-    public ControllerDomoPi(DeviceManager deviceManager) {
-        this.server = server;
+    private ControllerDomoPi() {
+        invokerComando = new InvokerComando();
+
     }
 
-    /**
-     * Si incarica di decriptare il messaggio in arrivo e prepararlo per il gestore dei dispositivi
-     * @param socket
-     * @throws IOException
-     */
-    public void request(Socket socket) throws IOException {
+    public static ControllerDomoPi getGestione(){
+        if(gestione == null){gestione = new ControllerDomoPi();}
+        return gestione;
+    }
 
-        InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+    public void startServer(){
+        if(serverStatus == false) {
+            server = new ServerTcpConnection(9000);
+            server.startServer();
+        }
+    }
 
-        // splitto i comandi se ce ne sono più di uno e passo un array di stringhe comando
-        //OperationList operationList = new OperationList(bufferedReader.readLine());
-
-        new ServerRequest(socket);
+    public void startProceses(Messaggio messaggio){
+        invokerComando.executeCommandMessage(messaggio.getCrude(),messaggio.getIperiferica());
     }
 
 
-    // avvio il server
 
-    // attendo il Comando dal modulo Request
 
-    // creo un oggetto DevicesManager
 
-    // invio il Comando all'intefaccia di Comando -> che richiede il dispositivo da comandare getDevice(ID).execute()
-
-    // Il dato che restituisco lo invio a Response
 
 }

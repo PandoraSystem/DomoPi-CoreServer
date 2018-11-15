@@ -18,6 +18,7 @@ public class ServerTcpConnection implements Runnable {
     public static int istanzeSocketAperte = 0;
 
 
+
     private ControllerDomoPi controllerObserver;
 
     /**
@@ -67,7 +68,12 @@ public class ServerTcpConnection implements Runnable {
                 Socket clientSocket = null;
                 clientSocket = this.serverSocket.accept();
                 istanzeSocketAperte++;
-                controllerObserver.request(clientSocket);
+                //controllerObserver.request(clientSocket);
+
+                // Request object and action
+                ServerRequest serverRequest = new ServerRequest(clientSocket);
+                Thread threadRequest = new Thread(serverRequest); threadRequest.start();
+
 
             } catch(IOException e) {
                 e.printStackTrace();
