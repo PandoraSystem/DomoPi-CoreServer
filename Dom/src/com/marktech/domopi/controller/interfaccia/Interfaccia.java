@@ -2,6 +2,7 @@ package com.marktech.domopi.controller.interfaccia;
 
 
 
+import com.marktech.domopi.controller.debug.Debug;
 import com.marktech.domopi.controller.periferiche.Iperiferica;
 
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class Interfaccia {
 
     public void addPeriferica(Iperiferica iperiferica){
         mappaPeriferiche.put(iperiferica.getId(),iperiferica);
+        Debug.getIstanza().myDebug("[Interfaccia] : Aggiunto : id:" + iperiferica.getId() + " idgruppo:" + iperiferica.getIdGruppo() + "pin: " + iperiferica.getOperiferica().getPin());
     }
 
     public void delPeriferica(Iperiferica iperiferica){
@@ -41,10 +43,25 @@ public class Interfaccia {
     }
 
     public Iperiferica getPeriferica(Iperiferica iperiferica){
+        Debug.getIstanza().myDebug(iperiferica.getId());
         return mappaPeriferiche.get(iperiferica.getId());
     }
 
     public Iperiferica getPeriferica(String idPeriferica){
-        return mappaPeriferiche.get(idPeriferica);
+
+        try {
+            if(mappaPeriferiche.containsKey(idPeriferica)){
+                Debug.getIstanza().myDebug(idPeriferica);
+            return mappaPeriferiche.get(idPeriferica);}
+            else{ //Response
+                Debug.getIstanza().myDebug("Elemento non trovato");
+                 return null; }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            Debug.getIstanza().myDebug(e.toString());
+            return null;
+            // Response
+        }
     }
 }

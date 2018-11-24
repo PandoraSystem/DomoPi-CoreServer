@@ -12,9 +12,8 @@ public class Messaggio implements Serializable {
     private Cmd crude;
     private Iperiferica iperiferica;
 
-    public Messaggio(int id, Cmd add) {
-        this.id = id;
-    }
+
+    //public Messaggio(int id, Cmd crude) {        this.id = id;    }
 
     public Messaggio(Cmd crude, Iperiferica iperiferica, int id) {
         this.crude = crude;

@@ -1,5 +1,6 @@
 package com.marktech.domopi.controller.commands;
 
+import com.marktech.domopi.controller.debug.Debug;
 import com.marktech.domopi.controller.periferiche.Iperiferica;
 
 import java.util.HashMap;
@@ -30,9 +31,12 @@ public class InvokerComando {
         comandi.put(cmdExe.getCommand(),cmdExe);
         comandi.put(cmdRed.getCommand(),cmdRed);
         comandi.put(cmdUpd.getCommand(),cmdUpd);
+
+        Debug.getIstanza().myDebug("[InvokerComandi] : Comandi caricati");
     }
 
     public void executeCommandMessage(Cmd crude, Iperiferica iperiferica){
         comandi.get(crude).execute(iperiferica);
+        Debug.getIstanza().myDebug("[InvokerComandi] : Comando in esecuzione");
     }
 }

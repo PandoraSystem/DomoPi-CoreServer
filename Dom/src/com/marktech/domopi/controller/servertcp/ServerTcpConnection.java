@@ -2,6 +2,7 @@ package com.marktech.domopi.controller.servertcp;
 
 
 import com.marktech.domopi.controller.ControllerDomoPi;
+import com.marktech.domopi.controller.debug.Debug;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -56,8 +57,9 @@ public class ServerTcpConnection implements Runnable {
     @Override
     public void run() {
         synchronized(this){
-
+            Debug.getIstanza().myDebug("[ServerTcpConnection] Avvio ascolto handshake socket");
             openServerSocket();
+            Debug.getIstanza().myDebug("[ServerTcpConnection] richiesta connessione in corso");
         }
 
 
@@ -66,17 +68,20 @@ public class ServerTcpConnection implements Runnable {
 
             try {
                 Socket clientSocket = null;
-                clientSocket = this.serverSocket.accept();
+                clientSocket = serverSocket.accept();
+                Debug.getIstanza().myDebug("Comunicazione instaurata");
                 istanzeSocketAperte++;
                 //controllerObserver.request(clientSocket);
 
                 // Request object and action
+                Debug.getIstanza().myDebug("[ServerTcpConnection] Invio a elaborazione richiesta");
                 ServerRequest serverRequest = new ServerRequest(clientSocket);
                 Thread threadRequest = new Thread(serverRequest); threadRequest.start();
 
 
             } catch(IOException e) {
                 e.printStackTrace();
+                Debug.getIstanza().myDebug(e.toString());
             }
 
 
@@ -93,7 +98,9 @@ public class ServerTcpConnection implements Runnable {
         } catch(Exception e) {
             e.printStackTrace();
             return false;
-        }   return true;
+        }
+        Debug.getIstanza().myDebug("ServerTcp Start");
+        return true;
     }
 
     public void stopServer()
@@ -112,6 +119,7 @@ public class ServerTcpConnection implements Runnable {
             throw new RuntimeException("Cannot open port: " + Integer.toString(port), e);
         }
     }
+
 
 
 

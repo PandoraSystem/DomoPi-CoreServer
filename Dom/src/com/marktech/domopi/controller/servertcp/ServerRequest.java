@@ -1,6 +1,7 @@
 package com.marktech.domopi.controller.servertcp;
 
 import com.marktech.domopi.controller.ControllerDomoPi;
+import com.marktech.domopi.controller.debug.Debug;
 import com.marktech.domopi.controller.message.Messaggio;
 
 import java.io.*;
@@ -65,24 +66,24 @@ public class ServerRequest implements Runnable{
                 // resta in ascolto
                 while(!clientSocket.isClosed())
                 {
-                    // Reading
-                    //message = bufferedReader.readLine();
-                    // Creo un nuovo Messaggio
-                    Messaggio messaggio = (Messaggio) objectInputStream.readObject();
-                    //ListaMessaggi.getIstanza().addMessaggio(messaggio);
-                    ControllerDomoPi.getGestione().startProceses(messaggio);
+                    Debug.getIstanza().myDebug("[ServerRequest] Deserializzo il messaggio");
 
-
-                    // Elaboration
-
+                    // per ogni oggetto che mi ritorna controllo che non sia null
+                    while(objectInputStream.readObject() != null){
+                        Messaggio messaggio = (Messaggio) objectInputStream.readObject();
+                        ControllerDomoPi.getGestione().startProceses(messaggio);
+                        Debug.getIstanza().myDebug("[ServerRequest] Invio a processo di elaborazione messaggio");
+                    }
 
                 }
 
 
             } catch(IOException e) {
                 e.printStackTrace();
+                Debug.getIstanza().myDebug(e.toString());
             } catch(ClassNotFoundException e) {
                 e.printStackTrace();
+                Debug.getIstanza().myDebug(e.toString());
             }
 
         }
